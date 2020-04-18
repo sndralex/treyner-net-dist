@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Landing from './pages/Landing.vue';
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
+import StarterNavbar from './layout/StarterNavbar.vue';
+import StarterFooter from './layout/StarterFooter.vue';
 
 Vue.use(Router);
 
@@ -12,7 +14,7 @@ export default new Router({
     {
       path: '/:lang?',
       name: 'index',
-      components: { default: Landing, header: MainNavbar, footer: MainFooter },
+      components: { default: Landing, header: StarterNavbar, footer: StarterFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: 'black' }

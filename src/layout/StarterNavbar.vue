@@ -1,8 +1,11 @@
 <template>
-  <navbar position="fixed" type="primary" menu-classes="ml-auto">
+  <navbar position="fixed" type="primary" menu-classes="ml-auto"
+    :transparent="transparent"
+    :color-on-scroll="colorOnScroll"
+  >
     <template slot-scope="{ toggle, isToggled }">
       <router-link v-popover:popover1 class="navbar-brand" to="/presentation">
-        My Site Name
+        treyner.net Home Site
       </router-link>
       <el-popover
         ref="popover1"
@@ -12,7 +15,7 @@
         trigger="hover"
       >
         <div class="popover-body">
-          Designed by Invision. Coded by Creative Tim
+          Never stop learning...
         </div>
       </el-popover>
     </template>
@@ -32,6 +35,10 @@ import { Popover } from 'element-ui';
 
 export default {
   name: 'main-navbar',
+    props: {
+    transparent: Boolean,
+    colorOnScroll: Number
+  },
   components: {
     DropDown,
     Navbar,

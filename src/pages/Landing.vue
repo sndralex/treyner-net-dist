@@ -6,9 +6,9 @@
         v-bind:style="{ 'background-image': 'url(' + homeData.imageLink +')'}"
       >
       </parallax>
-      <div class="content-center">
+      <div class="content-top">
         <div class="container">
-          <h3 class="title">{{homeData.title}}</h3>
+          <h4 class="title">{{homeData.title}}</h4>
         </div>
       </div>
     </div>

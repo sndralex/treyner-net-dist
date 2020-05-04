@@ -6,9 +6,55 @@
         v-bind:style="{ 'background-image': 'url(' + homeData.imageLink +')'}"
       >
       </parallax>
-      <div class="content-top">
+      <!--div class="content-top">
         <div class="container">
-          <h4 class="title">{{homeData.title}}</h4>
+          <h4 class="title"></h4>
+        </div>
+      </div-->
+    </div>
+    <div class=" section-team text-center">
+      <div class="container">
+        <h2 class="title">{{homeData.title}}</h2>
+        <div class="team">
+          <div
+              v-if="resumes.length === 0"
+              class="row"
+          >
+          </div>
+          <div 
+            v-else 
+            class="row"
+          >
+          <template  v-for="(resume) in homeData.resumesMap">
+           <div :key="resume.id" class="col-md-3">
+              <div class="team-player">
+                <img
+                  v-if="resume.photo"
+                      :alt="'Resume '  + resume.title"
+                      class="rounded-circle img-fluid img-raised"
+                      :src="resume.photo"
+                      :title="'Resume ' + resume.title"
+                />
+                <h4 class="title">{{resume.title}}</h4>
+                <p class="category text-primary">{{resume.job_title}}</p>
+                <p class="description">{{resume.short_description}}
+                </p>
+                <a v-if="resume.link_youtube" :href="resume.link_youtube" target="_blank" 
+                  class="btn btn-primary btn-icon btn-round"
+                  ><i class="fab fa-youtube"></i></a>
+                <a v-if="resume.link_instagtam" :href="resume.link_instagtam" target="_blank" 
+                  class="btn btn-primary btn-icon btn-round"
+                  ><i class="fab fa-instagram"></i></a>
+                <a v-if="resume.link_facebook" :href="resume.link_facebook" target="_blank" 
+                  class="btn btn-primary btn-icon btn-round"
+                  ><i class="fab fa-facebook-square"></i></a>
+                  <a v-if="resume.link_linkedin" :href="resume.link_linkedin" target="_blank" 
+                  class="btn btn-primary btn-icon btn-round"
+                  ><i class="fab fa-linkedin-square"></i></a>
+              </div>
+            </div>
+          </template> 
+          </div>
         </div>
       </div>
     </div>
@@ -16,12 +62,13 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto text-center">
-            <h2 class="title">Who we are?</h2>
+            <h2 class="title">{{homeData.title}}</h2>
             <h5 class="description">
-              According to the National Oceanic and Atmospheric Administration,
-              Ted, Scambos, NSIDClead scentist, puts the potentially record low
-              maximum sea ice extent tihs year down to low ice extent in the
-              Pacific and a late drop in ice extent in the Barents Sea.
+              <RichTextElement
+                    v-if="homeData.memoElement.resolveHtml()"
+                    class="article-detail-content"
+                    :element="homeData.memoElement"
+                />
             </h5>
           </div>
         </div>
@@ -30,17 +77,26 @@
           <div class="row">
             <div class="col-md-6">
               <div
-                class="image-container image-left"
-                style="background-image: url('img/login.jpg')"
+                class="image-container1 image-left1"
+                
               >
+              <img
+                  v-if="homeData.wwordImage"
+                    :alt="homeData.wwordSignature"
+                    class="rounded-circle img-fluid img-raised"
+                    :src="homeData.wwordImage"
+                    :title="homeData.wwordSignature"
+                />
                 <!-- First image on the left side -->
                 <p class="blockquote blockquote-primary">
-                  "Over the span of the satellite record, Arctic sea ice has
-                  been declining significantly, while sea ice in the
-                  Antarctichas increased very slightly"
+                  <RichTextElement
+                    v-if="homeData.wwordElement.resolveHtml()"
+                    class="article-detail-content"
+                    :element="homeData.wwordElement"
+                />
                   <br />
                   <br />
-                  <small>-NOAA</small>
+                  <small>{{homeData.wwordSignature}}</small>
                 </p>
               </div>
               <!-- Second image on the left side of the article -->
@@ -90,90 +146,6 @@
         </div>
       </div>
     </div>
-    <div class="section section-team text-center">
-      <div class="container">
-        <h2 class="title">Here is our team</h2>
-        <div class="team">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="team-player">
-                <img
-                  src="img/avatar.jpg"
-                  alt="Thumbnail Image"
-                  class="rounded-circle img-fluid img-raised"
-                />
-                <h4 class="title">Romina Hadid</h4>
-                <p class="category text-primary">Model</p>
-                <p class="description">
-                  You can write here details about one of your team members. You
-                  can give more details about what they do. Feel free to add
-                  some <a href="#">links</a> for people to be able to follow
-                  them outside the site.
-                </p>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-instagram"></i
-                ></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-facebook-square"></i
-                ></a>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="team-player">
-                <img
-                  src="img/ryan.jpg"
-                  alt="Thumbnail Image"
-                  class="rounded-circle img-fluid img-raised"
-                />
-                <h4 class="title">Ryan Tompson</h4>
-                <p class="category text-primary">Designer</p>
-                <p class="description">
-                  You can write here details about one of your team members. You
-                  can give more details about what they do. Feel free to add
-                  some <a href="#">links</a> for people to be able to follow
-                  them outside the site.
-                </p>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-linkedin"></i
-                ></a>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="team-player">
-                <img
-                  src="img/eva.jpg"
-                  alt="Thumbnail Image"
-                  class="rounded-circle img-fluid img-raised"
-                />
-                <h4 class="title">Eva Jenner</h4>
-                <p class="category text-primary">Fashion</p>
-                <p class="description">
-                  You can write here details about one of your team members. You
-                  can give more details about what they do. Feel free to add
-                  some <a href="#">links</a> for people to be able to follow
-                  them outside the site.
-                </p>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-google-plus"></i
-                ></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-youtube"></i
-                ></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     
   </div>
 </template>
@@ -193,6 +165,7 @@ export default {
   },
   data: () => ({
       home: null,
+      resumes: [],
       form: {
         firstName: '',
         email: '',
@@ -202,9 +175,23 @@ export default {
   computed: {
     homeData: function () {
       return {
+        resumesMap: this.resumes.map(r=>({
+          title: _.get(r, 'resume_title.value') || '--',
+          short_description: _.get(r, 'resume_short_description.value') || '--',
+          job_title: _.get(r, 'job_title.value') || '--',
+          photo: _.get(r, 'photo.value[0].url') || '',
+          link_instagtam: _.get(r, 'link_instagtam.value') || '' ,
+          link_facebook: _.get(r, 'link_facebook.value') || '' ,
+          link_youtube: _.get(r, 'link_youtube.value') || '' ,
+          link_linkedin: _.get(r, 'link_linkedin.value') || ''
+        })),
+        
         title: _.get(this.home, 'title.value') || '==title==',  //this.home.title.value || '==title==',
-        memoElement: _.get(this.home, 'memo.value') || '--memo--',
-        imageLink: _.get(this.home, 'heroBanner.value[0].url') || '--url--'
+        memoElement: _.get(this.home, 'memo') || '--memo--',
+        imageLink: _.get(this.home, 'heroBanner.value[0].url') || '--url--',
+        wwordElement: _.get(this.home, 'wiseword.value[0].wiseword') || '----',
+        wwordSignature: _.get(this.home, 'wiseword.value[0].signature.value') || '----',
+        wwordImage: _.get(this.home, 'wiseword.value[0].imageperson.value[0].url') || '---'
       }
     }
   },
@@ -216,6 +203,7 @@ export default {
   methods: {
     onChange: function () {
       this.home = HomeStore.getHome(this.language);
+      this.resumes = _.get(this.home,'resumes.value') || [];
     }
   },
   mounted: function () {
@@ -223,6 +211,7 @@ export default {
     HomeStore.addChangeListener(this.onChange);
     HomeStore.provideHome(this.language);
     this.home = HomeStore.getHome(this.language);
+    this.resumes = _.get(this.home,'resumes') || [];
   },
   beforeDestroy: function() {
     HomeStore.unsubscribe();

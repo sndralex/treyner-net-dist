@@ -46,10 +46,10 @@
                   ><i class="fab fa-instagram"></i></a>
                 <a v-if="resume.link_facebook" :href="resume.link_facebook" target="_blank" 
                   class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-facebook-square"></i></a>
+                  ><i class="fab fa-facebook"></i></a>
                   <a v-if="resume.link_linkedin" :href="resume.link_linkedin" target="_blank" 
                   class="btn btn-primary btn-icon btn-round"
-                  ><i class="fab fa-linkedin-square"></i></a>
+                  ><i class="fab fa-linkedin"></i></a>
               </div>
             </div>
           </template> 

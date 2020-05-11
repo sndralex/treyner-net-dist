@@ -34,7 +34,9 @@
                       :src="resume.photo"
                       :title="'Resume ' + resume.title"
                 />
-                <h4 class="title">{{resume.title}}</h4>
+                <h4 class="title">
+                  <router-link :to="resume.link">{{resume.title}}</router-link>
+                </h4>
                 <p class="category text-primary">{{resume.job_title}}</p>
                 <p class="description">{{resume.short_description}}
                 </p>
@@ -88,7 +90,7 @@
 <script>
 import { Button, FormGroupInput } from '@/components';
 import { HomeStore } from '../Stores/Home';
-import RichTextElement from '../components/RichTextElement.vue'
+import RichTextElement from '../components/RichTextElement.vue';
 import _ from 'lodash';
 
 export default {
@@ -112,14 +114,15 @@ export default {
     homeData: function () {
       return {
         resumesMap: this.resumes.map(r=>({
-          title: _.get(r, 'resume_title.value') || '--',
-          short_description: _.get(r, 'resume_short_description.value') || '--',
-          job_title: _.get(r, 'job_title.value') || '--',
+          title: _.get(r, 'resumeTitle.value') || '--',
+          short_description: _.get(r, 'resumeShortDescription.value') || '--',
+          job_title: _.get(r, 'jobTitle.value') || '--',
           photo: _.get(r, 'photo.value[0].url') || '',
-          link_instagtam: _.get(r, 'link_instagtam.value') || '' ,
-          link_facebook: _.get(r, 'link_facebook.value') || '' ,
-          link_youtube: _.get(r, 'link_youtube.value') || '' ,
-          link_linkedin: _.get(r, 'link_linkedin.value') || ''
+          link_instagtam: _.get(r, 'linkInstagtam.value') || '' ,
+          link_facebook: _.get(r, 'linkFacebook.value') || '' ,
+          link_youtube: _.get(r, 'linkYoutube.value') || '' ,
+          link_linkedin: _.get(r, 'linkLinkedin.value') || '',
+          link: `/${this.language}/resumes/${_.get(r, 'system.id')}`
         })),
         
         title: _.get(this.home, 'title.value') || '==title==',  //this.home.title.value || '==title==',

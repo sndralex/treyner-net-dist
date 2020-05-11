@@ -4,7 +4,7 @@
     :color-on-scroll="colorOnScroll"
   >
     <template slot-scope="{ toggle, isToggled }">
-      <router-link v-popover:popover1 class="navbar-brand" to="/presentation">
+      <router-link v-popover:popover1 class="navbar-brand" to="/">
         treyner.net Home Site
       </router-link>
       <el-popover
@@ -32,6 +32,7 @@
 <script>
 import { DropDown, NavbarToggleButton, Navbar, NavLink } from '@/components';
 import { Popover } from 'element-ui';
+//
 
 export default {
   name: 'main-navbar',
@@ -39,6 +40,9 @@ export default {
     transparent: Boolean,
     colorOnScroll: Number
   },
+  data: () => ({
+      SiteTitle: null,
+  }),
   components: {
     DropDown,
     Navbar,
@@ -47,6 +51,10 @@ export default {
     [Popover.name]: Popover
   }
 };
+/*
+EventBus.$on('i-got-clicked', clickCount => {
+  console.log(`Oh, that's nice. It's gotten ${clickCount} clicks! :)`)
+});*/
 </script>
 
 <style scoped></style>

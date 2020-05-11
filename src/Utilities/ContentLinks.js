@@ -1,11 +1,11 @@
 export function resolveContentLink(link, language) {
   let resultLink;
   switch (link.type) {
-  case 'article':
-    resultLink = `/articles/${link.itemId}`;
+  case 'resume':
+    resultLink = `/resumes/${link.itemId}`;
     break;
-  case 'coffee':
-    resultLink = `/coffees/${link.urlSlug}`;
+  case 'portal':
+    resultLink = `/portals/${link.urlSlug}`;
     break;
   case 'brewer':
     resultLink = `/brewers/${link.urlSlug}`; 

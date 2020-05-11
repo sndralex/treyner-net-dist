@@ -9,9 +9,6 @@ export class Home extends ContentItem {
         constructor() {
         super({
             propertyResolver: ((elementName) => {
-                if (elementName === 'untitled_linked_items') {
-                    return 'untitledLinkedItems';
-                }
                 if (elementName === 'hero_banner') {
                     return 'heroBanner';
                 }

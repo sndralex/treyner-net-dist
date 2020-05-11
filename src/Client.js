@@ -9,10 +9,12 @@ const previewApiKey = 'ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0K
 
 // models
 import { Home } from './Models/Home'
+import { Resume } from './Models/resume'
 
 // configure type resolvers
 let typeResolvers = [
   new TypeResolver('home', () => new Home()),
+  new TypeResolver('resume', () => new Resume())
 ];
 
 const cookies = new Cookies(document.cookies);

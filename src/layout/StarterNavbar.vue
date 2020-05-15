@@ -20,10 +20,9 @@
       </el-popover>
     </template>
     <template slot="navbar-menu">
-      <drop-down tag="li" title="Sample Dropdown">
-        <nav-link class="dropdown-item">
-          <i class="now-ui-icons shopping_box"></i> Headers
-        </nav-link>
+      <drop-down tag="li" title="Portals">
+        <a class="dropdown-item" href="/"><i class="now-ui-icons shopping_box"></i>How-To</a>
+        <a class="dropdown-item" href="/"><i class="now-ui-icons users_single-02"></i>Minecraft</a>
       </drop-down>
     </template>
   </navbar>

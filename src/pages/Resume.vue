@@ -65,75 +65,11 @@
           </a>
         </div>
         <h3 class="title">About me</h3>
-        <h5 class="description">
-          An artist of considerable range, Ryan — the name taken by
-          Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and
-          records all of his own music, giving it a warm, intimate feel with a
-          solid groove structure. An artist of considerable range.
-        </h5>
-        <div class="row">
-          <div class="col-md-6 ml-auto mr-auto">
-            <h4 class="title text-center">My Portfolio</h4>
-          </div>
-          <tabs
-            pills
-            class="nav-align-center"
-            tab-content-classes="gallery"
-            tab-nav-classes="nav-pills-just-icons"
-            type="primary"
-          >
-            <tab-pane title="Profile">
-              <i slot="label" class="now-ui-icons design_image"></i>
+          <RichTextElement
+              v-if="resumeData.resume_body"
+              :element="resumeData.resume_body"
+          />
 
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="row collections">
-                  <div class="col-md-6">
-                    <img src="img/bg6.jpg" class="img-raised" />
-                    <img src="img/bg11.jpg" alt="" class="img-raised" />
-                  </div>
-                  <div class="col-md-6">
-                    <img src="img/bg7.jpg" alt="" class="img-raised" />
-                    <img src="img/bg8.jpg" alt="" class="img-raised" />
-                  </div>
-                </div>
-              </div>
-            </tab-pane>
-
-            <tab-pane title="Home">
-              <i slot="label" class="now-ui-icons location_world"></i>
-
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="row collections">
-                  <div class="col-md-6">
-                    <img src="img/bg1.jpg" alt="" class="img-raised" />
-                    <img src="img/bg3.jpg" alt="" class="img-raised" />
-                  </div>
-                  <div class="col-md-6">
-                    <img src="img/bg8.jpg" alt="" class="img-raised" />
-                    <img src="img/bg7.jpg" alt="" class="img-raised" />
-                  </div>
-                </div>
-              </div>
-            </tab-pane>
-
-            <tab-pane title="Messages">
-              <i slot="label" class="now-ui-icons sport_user-run"></i>
-
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="row collections">
-                  <div class="col-md-6">
-                    <img src="img/bg3.jpg" alt="" class="img-raised" />
-                    <img src="img/bg8.jpg" alt="" class="img-raised" />
-                  </div>
-                  <div class="col-md-6">
-                    <img src="img/bg7.jpg" alt="" class="img-raised" />
-                    <img src="img/bg6.jpg" class="img-raised" />
-                  </div>
-                </div>
-              </div>
-            </tab-pane>
-          </tabs>
-        </div>
       </div>
     </div>
   </div>
@@ -160,6 +96,7 @@ export default {
       return {
           title: _.get(this.resume, 'resumeTitle.value') || '--',
           short_description: _.get(this.resume, 'resumeShortDescription.value') || '--',
+          resume_body: _.get(this.resume, 'resumeBody') || null,
           job_title: _.get(this.resume, 'jobTitle.value') || '--',
           photo: _.get(this.resume, 'photo.value[0].url') || '',
           link_instagtam: _.get(this.resume, 'linkInstagtam.value') || '' ,
@@ -171,13 +108,13 @@ export default {
   },
   watch: {
     language: function () {
-      console.log('watch language, provide Resume: ' + this.$route.params.resumeId);
+      //console.log('watch language, provide Resume: ' + this.$route.params.resumeId);
       ResumeStore.provideResume(this.$route.params.resumeId,this.language);
     }
   },
   methods: {
     onChange: function () {
-      console.log('onchane, get Resume: ' + this.$route.params.resumeId);
+      //console.log('onchane, get Resume: ' + this.$route.params.resumeId);
       this.resume = ResumeStore.getResume(this.$route.params.resumeId,this.language);
     }
   },
@@ -185,13 +122,13 @@ export default {
     ResumeStore.subscribe();
     ResumeStore.addChangeListener(this.onChange);
     ResumeStore.provideResume(this.$route.params.resumeId,this.language);
-    console.log('mounted, provide Resume: ' + this.$route.params.resumeId);
+    //console.log('mounted, provide Resume: ' + this.$route.params.resumeId);
     this.resume = ResumeStore.getResume(this.$route.params.resumeId,this.language);
-    console.log(this.resume);
+    //console.log(this.resume);
   //  EventBus.$emit('i-got-clicked', this.clickCount);
   },
   beforeUpdate: function(){
-    console.log('before update, get Resume: ' + this.$route.params.resumeId);
+    //console.log('before update, get Resume: ' + this.$route.params.resumeId);
     this.resume = ResumeStore.getResume(this.$route.params.resumeId, this.language);
   },
   beforeDestroy: function() {

@@ -17,7 +17,7 @@
         <h2 class="title">{{homeData.title}}</h2>
         <h5 class="description">
               <RichTextElement
-                    v-if="homeData.memoElement.resolveHtml()"
+                    v-if="homeData.memoElement"
                     class="article-detail-content"
                     :element="homeData.memoElement"
                 />
@@ -75,7 +75,7 @@
                 <!-- First image on the left side -->
                 <p class="blockquote blockquote-primary">
                   <RichTextElement
-                    v-if="homeData.wwordElement.resolveHtml()"
+                    v-if="homeData.wwordElement"
                     :element="homeData.wwordElement"
                 />
                   <small>{{homeData.wwordSignature}}</small>
@@ -126,9 +126,9 @@ export default {
         })),
         
         title: _.get(this.home, 'title.value') || '==title==',  //this.home.title.value || '==title==',
-        memoElement: _.get(this.home, 'memo') || '--memo--',
+        memoElement: _.get(this.home, 'memo') || null,
         imageLink: _.get(this.home, 'heroBanner.value[0].url') || '--url--',
-        wwordElement: _.get(this.home, 'wiseword.value[0].wiseword') || '----',
+        wwordElement: _.get(this.home, 'wiseword.value[0].wiseword') || null,
         wwordSignature: _.get(this.home, 'wiseword.value[0].signature.value') || '----',
         wwordImage: _.get(this.home, 'wiseword.value[0].imageperson.value[0].url') || '---'
       }
@@ -150,7 +150,7 @@ export default {
     HomeStore.addChangeListener(this.onChange);
     HomeStore.provideHome(this.language);
     this.home = HomeStore.getHome(this.language);
-    this.resumes = _.get(this.home,'resumes') || [];
+    this.resumes = _.get(this.home,'resumes.value') || [];
   },
   beforeDestroy: function() {
     HomeStore.unsubscribe();

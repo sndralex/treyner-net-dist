@@ -31,14 +31,14 @@ class Resume extends BaseStore {
         } else {
             resume[defaultLanguage][resumeId] = response.items[0];
         }
-        console.log(resume);
+        //console.log(resume);
         this.notifyChange();
       });
   }
 
   // Actions
   provideResume(resumeId,language) {
-    console.log('store provide Resume ' + resumeId);
+    //console.log('store provide Resume ' + resumeId);
     this.fetchResume(resumeId,language);
   }
 

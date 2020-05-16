@@ -18,6 +18,10 @@
         </div>
         <h3 class="title">{{resumeData.title}}</h3>
         <p class="category">{{resumeData.job_title}}</p>
+        <div class="content">
+            <p>{{resumeData.short_description}}</p>
+        </div>
+        <mcstatus />
         <!--div class="content">
           <div class="social-description">
             <h2>26</h2>
@@ -37,7 +41,8 @@
     <div class="section">
       <div class="container">
         <div class="button-container">
-          <a href="#button" class="btn btn-primary btn-round btn-lg">Follow</a>
+          <a v-if="resumeData.link_portal" :href="resumeData.link_portal" 
+                  class="btn btn-primary btn-round btn-lg">Portal</a>
           <a v-if="resumeData.link_youtube" :href="resumeData.link_youtube" target="_blank" 
                   class="btn btn-default btn-lg btn-icon btn-round"
                   rel="tooltip"
@@ -80,6 +85,7 @@ import { Tabs, TabPane } from '@/components';
 import { Button, FormGroupInput } from '@/components';
 import { ResumeStore } from '../Stores/Resume';
 import RichTextElement from '../components/RichTextElement.vue';
+import mcstatus from '../components/mcstatus.vue'
 import _ from 'lodash';
 //import { EventBus } from '../Utilities/EventBus';
 
@@ -102,7 +108,8 @@ export default {
           link_instagtam: _.get(this.resume, 'linkInstagtam.value') || '' ,
           link_facebook: _.get(this.resume, 'linkFacebook.value') || '' ,
           link_youtube: _.get(this.resume, 'linkYoutube.value') || '' ,
-          link_linkedin: _.get(this.resume, 'linkLinkedin.value') || ''
+          link_linkedin: _.get(this.resume, 'linkLinkedin.value') || '',
+          link_portal: _.get(this.resume, 'portalLink.value') || null
       }
     }
   },
@@ -140,7 +147,8 @@ export default {
   components: {
     RichTextElement,
     Tabs,
-    TabPane
+    TabPane,
+    mcstatus
   }
 }
 </script>

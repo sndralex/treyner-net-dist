@@ -31,6 +31,9 @@ export class Resume extends ContentItem {
                 if (elementName === 'resume_short_description') {
                     return 'resumeShortDescription';
                 }
+                if (elementName === 'portal_link') {
+                    return 'portalLink';
+                }
                 if (elementName === 'resume_body') {
                     return 'resumeBody';
                 }

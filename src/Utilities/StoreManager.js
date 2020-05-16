@@ -5,6 +5,7 @@
 //import * as FactStore from '../Stores/Fact';
 import * as HomeStore from '../Stores/Home';
 import * as ResumeStore from '../Stores/Resume';
+
 /*
 const allStores = [
   ArticleStore,

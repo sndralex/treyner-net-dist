@@ -11,7 +11,7 @@ import { onErrorResumeNext } from 'rxjs';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  //mode: 'history',
   linkExactActiveClass: 'active',
   routes: [
     {

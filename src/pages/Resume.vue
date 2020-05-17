@@ -21,7 +21,7 @@
         <div class="content">
             <p>{{resumeData.short_description}}</p>
         </div>
-        <mcstatus />
+        <!--mcstatus /-->
         <!--div class="content">
           <div class="social-description">
             <h2>26</h2>
@@ -41,8 +41,8 @@
     <div class="section">
       <div class="container">
         <div class="button-container">
-          <a v-if="resumeData.link_portal" :href="resumeData.link_portal" 
-                  class="btn btn-primary btn-round btn-lg">Portal</a>
+          <router-link v-if="resumeData.portalSlug" :to="resumeData.link_portal" class="btn btn-primary btn-round btn-lg">Portal</router-link>
+
           <a v-if="resumeData.link_youtube" :href="resumeData.link_youtube" target="_blank" 
                   class="btn btn-default btn-lg btn-icon btn-round"
                   rel="tooltip"
@@ -85,12 +85,12 @@ import { Tabs, TabPane } from '@/components';
 import { Button, FormGroupInput } from '@/components';
 import { ResumeStore } from '../Stores/Resume';
 import RichTextElement from '../components/RichTextElement.vue';
-import mcstatus from '../components/mcstatus.vue'
+import mcstatus from '../components/mcstatus.vue';
 import _ from 'lodash';
 //import { EventBus } from '../Utilities/EventBus';
 
 export default {
-    name: 'resume',
+  name: 'resume',
   props: ['language'],
   bodyClass: 'profile-page',
 
@@ -109,7 +109,8 @@ export default {
           link_facebook: _.get(this.resume, 'linkFacebook.value') || '' ,
           link_youtube: _.get(this.resume, 'linkYoutube.value') || '' ,
           link_linkedin: _.get(this.resume, 'linkLinkedin.value') || '',
-          link_portal: _.get(this.resume, 'portalLink.value') || null
+          link_portal: `/${this.language}/portals/${ _.get(this.resume, 'portalLink.value[0].portalSlug.value')}`,
+          portalSlug: _.get(this.resume, 'portalLink.value[0].portalSlug.value') || null
       }
     }
   },
@@ -131,7 +132,8 @@ export default {
     ResumeStore.provideResume(this.$route.params.resumeId,this.language);
     //console.log('mounted, provide Resume: ' + this.$route.params.resumeId);
     this.resume = ResumeStore.getResume(this.$route.params.resumeId,this.language);
-    //console.log(this.resume);
+    if(this.resume)
+      console.log(this.resume.portalLink.value[0].portalSlug.value);
   //  EventBus.$emit('i-got-clicked', this.clickCount);
   },
   beforeUpdate: function(){

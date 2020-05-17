@@ -13,6 +13,12 @@ export class PortalPage extends ContentItem {
                 if (elementName === 'page_body') {
                     return 'pageBody';
                 }
+                if (elementName === 'locked_selector') {
+                    return 'lockedSelector';
+                }
+                if (elementName === 'short_description') {
+                    return 'shortDescription';
+                }
                 if (elementName === 'publications_date') {
                     return 'publicationsDate';
                 }

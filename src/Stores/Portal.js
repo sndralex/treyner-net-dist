@@ -5,10 +5,11 @@ import { initLanguageCodeObject, defaultLanguage } from '../Utilities/LanguageCo
 import BaseStore from './Base';
 
 const resetStore = () => ({
-  articleList: initLanguageCodeObject(),
-  portalPage: initLanguageCodeObject()
+  portal: initLanguageCodeObject()
+//  portalLockedPages: initLanguageCodeObject(),
+//  portalPages: initLanguageCodeObject()
 });
-let { articleList, portalPage } = resetStore();
+let { portal /*, portalLockedPages, portalPages */ } = resetStore();
 
 class Portal extends BaseStore {
   constructor() {
@@ -16,11 +17,10 @@ class Portal extends BaseStore {
   }
 
   // Actions
-  provideArticle(articleId, language) {
+  providePortal(portalId, language) {
     let query = Client.items()
-      .type('article')
-      .equalsFilter('system.id', articleId)
-      .elementsParameter(['title', 'teaser_image', 'post_date', 'body_copy', 'video_host', 'video_id', 'tweet_link', 'theme', 'display_options'])
+      .type('portal')
+      .equalsFilter('elements.portal_slug', portalId)
 
     if (language) {
       query.languageParameter(language);
@@ -30,18 +30,29 @@ class Portal extends BaseStore {
       .pipe(takeUntil(this.observableUnsubscribe))
       .subscribe(response => {
         if (language) {
-          portalPage[language][articleId] = response.items[0];
+          portal[language][portalId] = response.items[0];
         } else {
-          portalPage[defaultLanguage][articleId] = response.items[0];
+          portal[defaultLanguage][portalId] = response.items[0];
         }
         this.notifyChange();
       });
   }
 
-  provideArticles(count, language) {
+  /*
+  providePortalPages(portalId, language) {
+    let _portal=null;
+    if(language)
+      _portal = portal[language][portalId];
+    else
+      _portal = portal[defaultLanguage][portalId];
+
+    if(!_portal)
+      return;
+
     let query = Client.items()
-      .type('article')
-      .orderParameter('elements.post_date', SortOrder.desc);
+      .type('portal_page')
+      .orderParameter('elements.publication_date', SortOrder.desc);
+      //.filter(`elements.sitemap=${_portal.sitemap}`);
 
     if (language) {
       query.languageParameter(language);
@@ -51,31 +62,32 @@ class Portal extends BaseStore {
       .pipe(takeUntil(this.observableUnsubscribe))
       .subscribe(response => {
         if (language) {
-          articleList[language] = response.items;
+          portalPages[language] = response.items;
         } else {
-          articleList[defaultLanguage] = response.items
+          portalPages[defaultLanguage] = response.items
         }
         this.notifyChange();
       });
   }
-
+*/
   // Methods
-  getArticle(articleId, language) {
+  getPortal(portalId, language) {
     if (language) {
-      return portalPage[language][articleId];
+      return portal[language][portalId];
     } else {
-      return portalPage[defaultLanguage][articleId];
+      return portal[defaultLanguage][portalId];
     }
   }
-
-  getArticles(count, language) {
+/*
+  getPortalPages(count, language) {
     if (language) {
-      return articleList[language].slice(0, count);
+      return portalPages[language].slice(0, count);
     }
     else {
-      return articleList[defaultLanguage].slice(0, count);
+      return portalPages[defaultLanguage].slice(0, count);
     }
   }
+*/
 }
 
 let PortalStore = new Portal();

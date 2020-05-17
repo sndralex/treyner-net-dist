@@ -1,15 +1,43 @@
 <template>
-    <div>
-        <ul id="example-2">
-            <li v-for="item in serverData.serversJson" :key="item">
-                {{item.ip}}
-            </li>
-        </ul>
+    <div class="row justify-content-center">
+        <span class="badge badge-Primary">My Servers:</span>
+        <div v-for="( item , index) in serverData.serversJson" :key="index">
+            <el-popover
+            popper-class="popover"
+            placement="bottom"
+            width="200"
+            trigger="hover"
+            >
+                <button slot="reference"
+                    v-bind:class="[ 'badge', item.online ? 'badge-success': 'badge-danger' ]"
+                >
+                {{item.hostname}}:{{item.port}}
+                </button>
+                <div class="popover-body">
+                    <ul slot="raw-content" class="list-group list-group-flush">
+                        <li class="badge badge-default list-group-item">{{item.ip}}</li>
+                        <li v-if="item.players" class="badge badge-default list-group-item">{{item.software}} {{item.version}}</li>
+                        <li v-bind:class="[ 'badge', item.online ? 'badge-success': 'badge-danger', 'list-group-item' ]"
+                            v-if="item.players"
+                        >
+                        players {{item.players.online}} of {{item.players.max}}:
+                            <ul slot="raw-content" class="list-group list-group-flush">
+                                <li class="badge-success list-group-item" v-for="(player, pindex) in item.players.list" :key="pindex">
+                                    {{player}}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </el-popover>
+        </div>
         
     </div>
 </template>
 
 <script>
+import { Button, FormGroupInput } from '@/components';
+import { Popover } from 'element-ui';
 import _ from 'lodash';
 
 export default {
@@ -18,7 +46,7 @@ export default {
     data: () => ({
       servers: [
           'nas.treyner.net',
-          'nas.treyner.nett:28565'
+          'nas.treyner.net:28565'
       ],
       serversJson: []
     }),
@@ -49,6 +77,11 @@ export default {
                     this.serversJson = texts;
                 })
         }
+    },
+    components: {
+        Button, 
+        FormGroupInput,
+        [Popover.name]: Popover
     }
 }
 </script>

@@ -6,3 +6,19 @@ p{
 .description{
     font-weight: $font-weight-normal;
 }
+
+.content-bottom{
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    z-index: 2;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 880px;
+
+  }

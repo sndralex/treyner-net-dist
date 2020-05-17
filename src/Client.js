@@ -10,11 +10,15 @@ const previewApiKey = 'ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0K
 // models
 import { Home } from './Models/Home'
 import { Resume } from './Models/resume'
+import { Portal } from './Models/portal'
+import { PortalPage } from './Models/portal_page'
 
 // configure type resolvers
 let typeResolvers = [
   new TypeResolver('home', () => new Home()),
-  new TypeResolver('resume', () => new Resume())
+  new TypeResolver('resume', () => new Resume()),
+  new TypeResolver('portal', () => new Portal()),
+  new TypeResolver('portal_page', () => new PortalPage())
 ];
 
 const cookies = new Cookies(document.cookies);

@@ -45,8 +45,8 @@ export default {
     props:[],
     data: () => ({
       servers: [
-          'nas.treyner.net',
-          'nas.treyner.net:28565'
+          'mc.treyner.net',
+          'mc.treyner.net:28565'
       ],
       serversJson: []
     }),

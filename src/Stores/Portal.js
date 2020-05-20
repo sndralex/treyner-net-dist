@@ -5,11 +5,10 @@ import { initLanguageCodeObject, defaultLanguage } from '../Utilities/LanguageCo
 import BaseStore from './Base';
 
 const resetStore = () => ({
-  portal: initLanguageCodeObject()
-//  portalLockedPages: initLanguageCodeObject(),
-//  portalPages: initLanguageCodeObject()
+  portal: initLanguageCodeObject(),
+
 });
-let { portal /*, portalLockedPages, portalPages */ } = resetStore();
+let { portal } = resetStore();
 
 class Portal extends BaseStore {
   constructor() {
@@ -38,38 +37,6 @@ class Portal extends BaseStore {
       });
   }
 
-  /*
-  providePortalPages(portalId, language) {
-    let _portal=null;
-    if(language)
-      _portal = portal[language][portalId];
-    else
-      _portal = portal[defaultLanguage][portalId];
-
-    if(!_portal)
-      return;
-
-    let query = Client.items()
-      .type('portal_page')
-      .orderParameter('elements.publication_date', SortOrder.desc);
-      //.filter(`elements.sitemap=${_portal.sitemap}`);
-
-    if (language) {
-      query.languageParameter(language);
-    }
-
-    query.toObservable()
-      .pipe(takeUntil(this.observableUnsubscribe))
-      .subscribe(response => {
-        if (language) {
-          portalPages[language] = response.items;
-        } else {
-          portalPages[defaultLanguage] = response.items
-        }
-        this.notifyChange();
-      });
-  }
-*/
   // Methods
   getPortal(portalId, language) {
     if (language) {
@@ -78,16 +45,7 @@ class Portal extends BaseStore {
       return portal[defaultLanguage][portalId];
     }
   }
-/*
-  getPortalPages(count, language) {
-    if (language) {
-      return portalPages[language].slice(0, count);
-    }
-    else {
-      return portalPages[defaultLanguage].slice(0, count);
-    }
-  }
-*/
+
 }
 
 let PortalStore = new Portal();

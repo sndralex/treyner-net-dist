@@ -6,6 +6,7 @@
 import * as HomeStore from '../Stores/Home';
 import * as ResumeStore from '../Stores/Resume';
 import * as  PortalStore  from '../Stores/Portal';
+import { PortalPagesStore } from '../Stores/PortalPages';
 
 /*
 const allStores = [
@@ -19,7 +20,8 @@ const allStores = [
 const allStores =[
   HomeStore,
   ResumeStore,
-  PortalStore
+  PortalStore,
+  PortalPagesStore
 ];
 const resetStores = () => allStores.forEach(store => store.resetStore());
 

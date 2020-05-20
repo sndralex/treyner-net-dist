@@ -12,6 +12,7 @@
         </div>
     </div>
 {{portalData.title}}
+<portalpages :key="pageListKey" :language="this.language" :sitemap="portalData.portalSitemap" :portalSlug="portalData.portalSlug" />
 </div>
 </template>
 
@@ -20,6 +21,7 @@
 import { PortalStore } from '../Stores/Portal';
 import RichTextElement from '../components/RichTextElement.vue';
 import mcstatus from '../components/mcstatus.vue';
+import portalpages from './components/PortalPages.vue';
 import _ from 'lodash';
 
 export default {
@@ -28,19 +30,21 @@ export default {
 
     data: () => ({
       portal: null,
+      pageListKey: 0
   }),
   computed: {
     portalData: function () {
       return {
           title: _.get(this.portal, 'portalTitle.value') || '--',
           imageLink: _.get(this.portal, 'banner.value[0].url') || '--url--',
-          portalSlug: _.get(this.portal, 'portalSlug.value')      
+          portalSlug: _.get(this.portal, 'portalSlug.value'),
+          portalSitemap: _.get(this.portal, 'sitemap.value[0].codename')      
         }
     }
   },
   watch: {
     language: function () {
-      console.log('watch language, provide portal: ' + this.$route.params.portalId);
+      //console.log('watch language, provide portal: ' + this.$route.params.portalId);
       PortalStore.providePortal(this.$route.params.portalId,this.language);
     }
   },
@@ -48,15 +52,17 @@ export default {
     onChange: function () {
       //console.log('onchane, get Resume: ' + this.$route.params.resumeId);
       this.portal = PortalStore.getPortal(this.$route.params.portalId,this.language);
+      //console.log(this.portal);
+      this.pageListKey += 1;
     }
   },
   mounted: function () {
     PortalStore.subscribe();
     PortalStore.addChangeListener(this.onChange);
     PortalStore.providePortal(this.$route.params.portalId,this.language);
-    console.log('mounted, provide Portal: ' + this.$route.params.portalId);
+    //console.log('mounted, provide Portal: ' + this.$route.params.portalId);
     this.portal = PortalStore.getPortal(this.$route.params.portalId,this.language);
-    console.log(this.portal);
+    //console.log(this.portal);
   //  EventBus.$emit('i-got-clicked', this.clickCount);
   },
   beforeUpdate: function(){
@@ -71,7 +77,8 @@ export default {
   },
   components: {
     RichTextElement,
-    mcstatus
+    mcstatus,
+    portalpages
   }
 
 }

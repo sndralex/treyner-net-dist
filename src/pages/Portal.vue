@@ -11,7 +11,6 @@
             </div>
         </div>
     </div>
-{{portalData.title}}
 <portalpages :key="pageListKey" :language="this.language" :sitemap="portalData.portalSitemap" :portalSlug="portalData.portalSlug" />
 </div>
 </template>

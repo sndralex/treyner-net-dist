@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Landing from './pages/Landing.vue';
 import Resume  from './pages/Resume.vue';
 import Portal from './pages/Portal.vue';
+import PortalPage from './pages/PortalPage.vue';
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
 import StarterNavbar from './layout/StarterNavbar.vue';
@@ -37,6 +38,15 @@ export default new Router({
       path: '/:lang?/portals/:portalId',
       name: 'portal',
       components: {default: Portal, header: StarterNavbar, footer: StarterFooter},
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: 'black' }
+      }
+    },
+    {
+      path: '/:lang?/portals/:portalSlug/:pageId',
+      name: 'page',
+      components: {default: PortalPage, header: StarterNavbar, footer: StarterFooter},
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: 'black' }

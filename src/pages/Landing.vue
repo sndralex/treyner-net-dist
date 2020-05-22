@@ -38,8 +38,8 @@
                   <router-link :to="resume.link">{{resume.title}}</router-link>
                 </h4>
                 <p class="category text-primary">{{resume.job_title}}</p>
-                <p class="description">{{resume.short_description}}
-                </p>
+                <!--p class="description">{{resume.short_description}}
+                </!--p-->
                 <a v-if="resume.link_youtube" :href="resume.link_youtube" target="_blank" 
                   class="btn btn-primary btn-icon btn-round"
                   ><i class="fab fa-youtube"></i></a>

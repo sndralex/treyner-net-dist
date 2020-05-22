@@ -1,21 +1,22 @@
 <template>
-<div>
-    <card class="card-nav-tabs text-center" header-classes="card-header-warning">
-        <div slot="header" class="mt-2">
-            Featured
-        </div>
-        <h2 class="card-title">{{pageData.title}}</h2>
-        <p class="card-text">
-            <RichTextElement
-                    v-if="pageData.bodyElement"
-                    :element="pageData.bodyElement"
-                />
-        </p>
-        <n-button type="primary" link ><router-link :to="pageData.portalLink">Back...</router-link></n-button>
-        <div slot="footer" class="card-footer text-muted mb-2">
-            {{pageData.publicationsDate}}
-        </div>
-    </card>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+      <card class="card-nav-tabs text-center" header-classes="card-header-warning">
+          <n-button type="primary" link ><router-link :to="pageData.portalLink">Back...</router-link></n-button>
+          <h2 class="card-title">{{pageData.title}}</h2>
+          <p class="card-text">
+            
+              <RichTextElement
+                      v-if="pageData.bodyElement"
+                      :element="pageData.bodyElement"
+                  />
+          </p>
+          <n-button type="primary" link ><router-link :to="pageData.portalLink">Back...</router-link></n-button>
+          <div slot="footer" class="card-footer text-muted mb-2">
+              {{pageData.publicationsDate}}
+          </div>
+      </card>
+  </div>
 </div>
 </template>
 

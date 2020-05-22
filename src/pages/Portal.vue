@@ -12,16 +12,17 @@
             </div>
         </div>
     </div>
-<portalpages v-if="portalData.noPageId"
-              :key="pageListKey" 
-              :language="this.language" 
-              :sitemap="portalData.portalSitemap" 
-              :portalSlug="portalData.portalSlug" />
+        <portalpages v-if="portalData.noPageId"
+                      :key="pageListKey" 
+                      :language="this.language" 
+                      :sitemap="portalData.portalSitemap" 
+                      :portalSlug="portalData.portalSlug" />
+        
+        <portalpage  v-if="this.$route.params.pageId"
+                      :language="this.language"
+                      :pageId="this.$route.params.pageId"
+                      />
 
-<portalpage  v-if="this.$route.params.pageId"
-              :language="this.language"
-              :pageId="this.$route.params.pageId"
-              />
 </div>
 </template>
 

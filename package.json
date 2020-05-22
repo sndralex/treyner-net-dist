@@ -10,6 +10,7 @@
   "dependencies": {
     "@kentico/kontent-delivery": "^9.0.0",
     "bootstrap": "^4.3.0",
+    "dateformat": "^3.0.3",
     "element-ui": "^2.5.4",
     "nouislider": "^11.1.0",
     "rxjs": "^6.5.4",
@@ -26,7 +27,7 @@
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "babel-plugin-component": "^1.1.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.14.1",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.6"
   }

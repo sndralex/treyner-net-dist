@@ -1,17 +1,27 @@
 <template>
 <div>
-    <div class="page-header page-header-small clear-filter" filter-color="green">
+    <div :class="[ 'page-header', portalData.noPageId ? 'page-header-small': 'page-header-xsmall', 'clear-filter' ]" 
+        filter-color="green">
         <parallax
             class="page-header-image"
             v-bind:style="{ 'background-image': 'url(' + portalData.imageLink +')'}">
         </parallax>
         <div class="content-bottom">
             <div class="container">
-                <mcstatus v-if="portalData.portalSlug==='minecraft'"/>
+                <mcstatus v-if="portalData.portalSlug==='minecraft' && portalData.noPageId"/>
             </div>
         </div>
     </div>
-<portalpages :key="pageListKey" :language="this.language" :sitemap="portalData.portalSitemap" :portalSlug="portalData.portalSlug" />
+<portalpages v-if="portalData.noPageId"
+              :key="pageListKey" 
+              :language="this.language" 
+              :sitemap="portalData.portalSitemap" 
+              :portalSlug="portalData.portalSlug" />
+
+<portalpage  v-if="this.$route.params.pageId"
+              :language="this.language"
+              :pageId="this.$route.params.pageId"
+              />
 </div>
 </template>
 
@@ -21,6 +31,8 @@ import { PortalStore } from '../Stores/Portal';
 import RichTextElement from '../components/RichTextElement.vue';
 import mcstatus from '../components/mcstatus.vue';
 import portalpages from './components/PortalPages.vue';
+import portalpage from './components/PortalPage';
+
 import _ from 'lodash';
 
 export default {
@@ -37,7 +49,8 @@ export default {
           title: _.get(this.portal, 'portalTitle.value') || '--',
           imageLink: _.get(this.portal, 'banner.value[0].url') || '--url--',
           portalSlug: _.get(this.portal, 'portalSlug.value'),
-          portalSitemap: _.get(this.portal, 'sitemap.value[0].codename')      
+          portalSitemap: _.get(this.portal, 'sitemap.value[0].codename'),
+          noPageId: _.isEmpty(this.$route.params.pageId)    
         }
     }
   },
@@ -77,7 +90,8 @@ export default {
   components: {
     RichTextElement,
     mcstatus,
-    portalpages
+    portalpages,
+    portalpage
   }
 
 }

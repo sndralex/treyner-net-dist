@@ -1,4 +1,5 @@
 <template>
+<div>
     <card class="card-nav-tabs text-center" header-classes="card-header-warning">
         <div slot="header" class="mt-2">
             Featured
@@ -12,23 +13,25 @@
         </p>
         <n-button type="primary" link ><router-link :to="pageData.portalLink">Back...</router-link></n-button>
         <div slot="footer" class="card-footer text-muted mb-2">
-            2 days ago
+            {{pageData.publicationsDate}}
         </div>
     </card>
+</div>
 </template>
 
 <script>
 
 //import { Button, FormGroupInput } from '@/components';
-import {Card, Button} from '@/components'
-import { pageStore } from '../Stores/PortalPage';
-import RichTextElement from '../components/RichTextElement.vue';
+import dateFormat from 'dateformat';
+import {Card, Button} from '@/components';
+import { pageStore } from '../../Stores/PortalPage';
+import RichTextElement from '../../components/RichTextElement.vue';
 
 import _ from 'lodash';
 
 export default {
     name: 'portalpage',
-    props: ['language'],
+    props: ['language', 'pageId'],
 
     data: () => ({
       page: null,
@@ -37,28 +40,32 @@ export default {
     pageData: function () {
       return {
           title: _.get(this.page, 'pageTitle.value') || '--',
-          bodyElement: _.get(this.page, 'pageBody')  ,
-          portalLink: `/${this.language}/portals/${this.$route.params.portalSlug}/`    
+          bodyElement: _.get(this.page, 'pageBody'),
+          publicationsDate: this.formatDate(_.get(this.page, 'publicationsDate.value')),
+          portalLink: `/${this.language}/portals/${this.$route.params.portalId}`      
         }
     }
   },
   watch: {
     language: function () {
       //console.log('watch language, provide portal: ' + this.$route.params.portalId);
-      pageStore.providePortalPage(this.$route.params.pageId,this.language);
+      pageStore.providePortalPage(this.pageId,this.language);
     }
   },
   methods: {
+    formatDate: function(value){
+      return value ? dateFormat(value, 'longDate') : '';
+    },
     onChange: function () {
       //console.log('onchane, get Resume: ' + this.$route.params.resumeId);
-      this.page = pageStore.getPortalPage(this.$route.params.pageId,this.language);
+      this.page = pageStore.getPortalPage(this.pageId,this.language);
       //console.log(this.portal);
     }
   },
   mounted: function () {
     pageStore.subscribe();
     pageStore.addChangeListener(this.onChange);
-    pageStore.providePortalPage(this.$route.params.pageId,this.language);
+    pageStore.providePortalPage(this.pageId,this.language);
     //console.log('mounted, provide Portal: ' + this.$route.params.portalId);
  //   this.page = pageStore.getPortalPage(this.$route.params.pageId,this.language);
     //console.log(this.portal);
@@ -66,7 +73,7 @@ export default {
   },
   beforeUpdate: function(){
     //console.log('before update, get Resume: ' + this.$route.params.resumeId);
-    this.page = pageStore.getPortalPage(this.$route.params.pageId, this.language);
+    this.page = pageStore.getPortalPage(this.pageId, this.language);
   },
   beforeDestroy: function() {
     pageStore.unsubscribe();

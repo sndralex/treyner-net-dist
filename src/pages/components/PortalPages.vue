@@ -21,7 +21,9 @@
     </div>
 </template>
 <script>
-import {Card, Button} from '@/components'
+
+import dateFormat from 'dateformat';
+import {Card, Button} from '@/components';
 import { PortalPagesStore } from '../../Stores/PortalPages';
 import RichTextElement from '../../components/RichTextElement.vue';
 import _ from 'lodash';
@@ -40,7 +42,7 @@ export default {
             pageId: _.get(r, 'system.id'),
             pageTitle: _.get(r, 'pageTitle.value') || '--',
             shortDescription: _.get(r, 'shortDescription') || '--',
-            publicationsDate: _.get(r, 'publicationsDate.value') || '--',
+            publicationsDate: this.formatDate(_.get(r, 'publicationsDate.value')),
             //photo: _.get(r, 'photo.value[0].url') || '',
             link: `/${this.language}/portals/${this.portalSlug}/${_.get(r, 'system.id')}`
         })),
@@ -59,6 +61,9 @@ export default {
 
   },
   methods: {
+    formatDate: function(value){
+      return value ? dateFormat(value, 'longDate') : '';
+    },
     onChange: function () {
       //console.log('onchane, get Resume: ' + this.$route.params.resumeId);
       this.portalPages = PortalPagesStore.getPortalPages(100,this.language);

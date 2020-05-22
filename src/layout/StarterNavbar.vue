@@ -21,8 +21,8 @@
     </template>
     <template slot="navbar-menu">
       <drop-down tag="li" title="Portals">
-        <a class="dropdown-item" href="/"><i class="now-ui-icons shopping_box"></i>How-To</a>
-        <a class="dropdown-item" href="/"><i class="now-ui-icons users_single-02"></i>Minecraft</a>
+        <router-link :to="headerData.linkHowTo" :class="['dropdown-item']"><i class="now-ui-icons shopping_box"></i>How-To</router-link>
+        <router-link :to="headerData.linkMinecraft" :class="['dropdown-item']"><i class="now-ui-icons shopping_box"></i>Minecraft</router-link>
       </drop-down>
     </template>
   </navbar>
@@ -42,6 +42,14 @@ export default {
   data: () => ({
       SiteTitle: null,
   }),
+  computed: {
+    headerData: function () {
+      return {
+            linkMinecraft: `/${this.$route.params.lang ? this.$route.params.lang : 'en-US'}/portals/minecraft/`,
+            linkHowTo: `/${this.$route.params.lang ? this.$route.params.lang : 'en-US'}/portals/how-to/`
+        }
+    }
+  },
   components: {
     DropDown,
     Navbar,

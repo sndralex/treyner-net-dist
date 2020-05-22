@@ -4,7 +4,7 @@
       <card class="card-nav-tabs text-center" header-classes="card-header-warning">
           <n-button type="primary" link ><router-link :to="pageData.portalLink">Back...</router-link></n-button>
           <h2 class="card-title">{{pageData.title}}</h2>
-          <p class="card-text">
+          <p class="card-text p-left-align">
             
               <RichTextElement
                       v-if="pageData.bodyElement"

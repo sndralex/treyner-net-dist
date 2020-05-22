@@ -2,6 +2,10 @@ p{
     line-height: 1.61em;
     font-weight: $font-weight-normal;
     font-size: 1.2em;
+
+    &.p-left-align{
+        text-align: left;
+    }
 }
 .description{
     font-weight: $font-weight-normal;

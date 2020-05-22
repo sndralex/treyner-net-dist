@@ -127,10 +127,10 @@ export default {
         
         title: _.get(this.home, 'title.value') || '==title==',  //this.home.title.value || '==title==',
         memoElement: _.get(this.home, 'memo') || null,
-        imageLink: _.get(this.home, 'heroBanner.value[0].url') || '--url--',
+        imageLink: _.get(this.home, 'heroBanner.value[0].url') || '',
         wwordElement: _.get(this.home, 'wiseword.value[0].wiseword') || null,
         wwordSignature: _.get(this.home, 'wiseword.value[0].signature.value') || '----',
-        wwordImage: _.get(this.home, 'wiseword.value[0].imageperson.value[0].url') || '---'
+        wwordImage: _.get(this.home, 'wiseword.value[0].imageperson.value[0].url')|| ''
       }
     }
   },

@@ -48,7 +48,7 @@ export default {
     portalData: function () {
       return {
           title: _.get(this.portal, 'portalTitle.value') || '--',
-          imageLink: _.get(this.portal, 'banner.value[0].url') || '--url--',
+          imageLink: _.get(this.portal, 'banner.value[0].url') || '',
           portalSlug: _.get(this.portal, 'portalSlug.value'),
           portalSitemap: _.get(this.portal, 'sitemap.value[0].codename'),
           noPageId: _.isEmpty(this.$route.params.pageId)    

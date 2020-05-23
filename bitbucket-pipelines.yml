@@ -1,0 +1,5 @@
+pipelines:
+  default:
+    - step:
+        script:
+          - git push --mirror git@github.com:sndralex/treyner-net-preview.git

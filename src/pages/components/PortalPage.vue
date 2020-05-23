@@ -61,6 +61,7 @@ export default {
       //console.log('onchane, get Resume: ' + this.$route.params.resumeId);
       this.page = pageStore.getPortalPage(this.pageId,this.language);
       //console.log(this.portal);
+      document.title = this.page.pageTitle.value;
     }
   },
   mounted: function () {

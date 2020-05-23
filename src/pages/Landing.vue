@@ -125,11 +125,11 @@ export default {
           link: `/${this.language}/resumes/${_.get(r, 'system.id')}`
         })),
         
-        title: _.get(this.home, 'title.value') || '==title==',  //this.home.title.value || '==title==',
+        title: _.get(this.home, 'title.value') || '',  //this.home.title.value || '==title==',
         memoElement: _.get(this.home, 'memo') || null,
         imageLink: _.get(this.home, 'heroBanner.value[0].url') || '',
         wwordElement: _.get(this.home, 'wiseword.value[0].wiseword') || null,
-        wwordSignature: _.get(this.home, 'wiseword.value[0].signature.value') || '----',
+        wwordSignature: _.get(this.home, 'wiseword.value[0].signature.value') || '',
         wwordImage: _.get(this.home, 'wiseword.value[0].imageperson.value[0].url')|| ''
       }
     }
@@ -143,14 +143,15 @@ export default {
     onChange: function () {
       this.home = HomeStore.getHome(this.language);
       this.resumes = _.get(this.home,'resumes.value') || [];
+      document.title = this.home.title.value;
     }
   },
   mounted: function () {
     HomeStore.subscribe();
     HomeStore.addChangeListener(this.onChange);
     HomeStore.provideHome(this.language);
-    this.home = HomeStore.getHome(this.language);
-    this.resumes = _.get(this.home,'resumes.value') || [];
+//    this.home = HomeStore.getHome(this.language);
+//    this.resumes = _.get(this.home,'resumes.value') || [];
   },
   beforeDestroy: function() {
     HomeStore.unsubscribe();

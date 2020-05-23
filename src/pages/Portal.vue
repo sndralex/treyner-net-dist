@@ -67,6 +67,7 @@ export default {
       this.portal = PortalStore.getPortal(this.$route.params.portalId,this.language);
       //console.log(this.portal);
       this.pageListKey += 1;
+      document.title = this.portal.portalTitle.value;
     }
   },
   mounted: function () {
@@ -74,7 +75,7 @@ export default {
     PortalStore.addChangeListener(this.onChange);
     PortalStore.providePortal(this.$route.params.portalId,this.language);
     //console.log('mounted, provide Portal: ' + this.$route.params.portalId);
-    this.portal = PortalStore.getPortal(this.$route.params.portalId,this.language);
+    //this.portal = PortalStore.getPortal(this.$route.params.portalId,this.language);
     //console.log(this.portal);
   //  EventBus.$emit('i-got-clicked', this.clickCount);
   },

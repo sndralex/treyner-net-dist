@@ -4,8 +4,8 @@ import { selectedProjectCookieName, defaultProjectId } from './Utilities/Selecte
 // Kentico Kontent
 import { DeliveryClient, TypeResolver } from '@kentico/kontent-delivery';
 
-const projectId = '51542068-3efd-00fe-cbb2-f935cce3ec65'; //process.env.VUE_APP_PROJECT_ID || '';
-const previewApiKey = 'ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0KICAianRpIjogIjkyMzAxMjdiNTE2ZDQzZjk4OTZiNjU4MjVlZGNhNzBkIiwNCiAgImlhdCI6ICIxNTc4MDUxMDkwIiwNCiAgImV4cCI6ICIxOTIzNjUxMDkwIiwNCiAgInByb2plY3RfaWQiOiAiNTE1NDIwNjgzZWZkMDBmZWNiYjJmOTM1Y2NlM2VjNjUiLA0KICAidmVyIjogIjEuMC4wIiwNCiAgImF1ZCI6ICJwcmV2aWV3LmRlbGl2ZXIua2VudGljb2Nsb3VkLmNvbSINCn0.FxjV6khT13Zxic9lr5rqg7oY0Hw1R4PZYv0PeJVvdYM'; //process.env.VUE_APP_PREVIEW_API_KEY || '';
+const projectId = process.env.VUE_APP_PROJECT_ID || ''; //'51542068-3efd-00fe-cbb2-f935cce3ec65'; //process.env.VUE_APP_PROJECT_ID || '';
+const previewApiKey = process.env.VUE_APP_PREVIEW_API_KEY || '' //'ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0KICAianRpIjogIjkyMzAxMjdiNTE2ZDQzZjk4OTZiNjU4MjVlZGNhNzBkIiwNCiAgImlhdCI6ICIxNTc4MDUxMDkwIiwNCiAgImV4cCI6ICIxOTIzNjUxMDkwIiwNCiAgInByb2plY3RfaWQiOiAiNTE1NDIwNjgzZWZkMDBmZWNiYjJmOTM1Y2NlM2VjNjUiLA0KICAidmVyIjogIjEuMC4wIiwNCiAgImF1ZCI6ICJwcmV2aWV3LmRlbGl2ZXIua2VudGljb2Nsb3VkLmNvbSINCn0.FxjV6khT13Zxic9lr5rqg7oY0Hw1R4PZYv0PeJVvdYM'; //process.env.VUE_APP_PREVIEW_API_KEY || '';
 
 // models
 import { Home } from './Models/Home'
@@ -30,15 +30,37 @@ if (currentProjectId) {
 }
 
 const isPreview = () => previewApiKey !== '';
-
+/*
 let Client = new DeliveryClient({
   projectId: currentProjectId,
   typeResolvers: typeResolvers,
   previewApiKey: previewApiKey,
   enablePreviewMode: isPreview()
 });
+*/
+let Client = new DeliveryClient({
+  projectId: currentProjectId,
+  typeResolvers: typeResolvers,
+  previewApiKey: previewApiKey,
+  globalQueryConfig:  {
+    usePreviewMode: isPreview(), // Queries the Delivery Preview API.
+  }
+});
 
 
+const resetClient = (newProjectId) => {
+  Client = new DeliveryClient({
+    projectId: newProjectId,
+    typeResolvers: typeResolvers,
+    previewApiKey: previewApiKey,
+    globalQueryConfig:  {
+      usePreviewMode: isPreview(), // Queries the Delivery Preview API.
+    }
+  });
+  const cookies = new Cookies(document.cookies);
+  cookies.set(selectedProjectCookieName, newProjectId, { path: '/' });
+}
+/*
 const resetClient = (newProjectId) => {
   Client = new DeliveryClient({
     projectId: newProjectId,
@@ -49,7 +71,7 @@ const resetClient = (newProjectId) => {
   const cookies = new Cookies(document.cookies);
   cookies.set(selectedProjectCookieName, newProjectId, { path: '/' });
 }
-
+*/
 export {
   Client,
   resetClient

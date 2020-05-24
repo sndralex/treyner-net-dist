@@ -46,7 +46,8 @@ export default {
     data: () => ({
       servers: [
           'mc.treyner.net',
-          'mc.treyner.net:28565'
+          'mc.treyner.net:28565',
+          'treynerland.mcs.cool:25563'
       ],
       serversJson: []
     }),
